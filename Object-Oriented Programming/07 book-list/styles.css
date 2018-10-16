@@ -1,0 +1,42 @@
+body {
+  padding: 30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+}
+
+table {
+  border-spacing: 0;
+}
+
+/* Delete link styles */
+.delete:link,
+.delete:visited {
+  text-decoration: none;
+  color: #c0392b;
+  transition: color 0.3s ease-out;
+}
+
+.delete:hover,
+.delete:active {
+  color: #e74c3c;
+}
+
+/* Notification styles */
+.success,
+.error {
+  color: #fff;
+  padding: 5px 10px;
+  margin: 5px 0 15px 0;
+  border-radius: 3px;
+}
+
+.success {
+  background-color: #2ecc71;
+}
+
+.error {
+  background-color: #e74c3c;
+}
