@@ -3,7 +3,7 @@ const ui = new UI();
 
 const search = document.getElementById('search-user');
 
-search.addEventListener('keyup', e => {
+search.addEventListener('input', () => {
   if (search.value !== '') {
     getUserData(search.value);
   } else {
@@ -13,15 +13,14 @@ search.addEventListener('keyup', e => {
 
 function getUserData(user) {
   github.get(user).then(({ profile, repos }) => {
-    if (profile.message !== 'Not Found') {
-      ui.clearAlert();
-      ui.displaySpinner().then(() => {
+    ui.displaySpinner().then(() => {
+      if (profile.message !== 'Not Found') {
+        ui.clearAlert();
         ui.showProfile(profile);
         ui.showRepos(repos);
-      });
-    } else {
-      ui.showAlert('User not found', 'alert alert-danger');
-      ui.clearProfile();
-    }
+      } else {
+        ui.showAlert('No user by that name.');
+      }
+    });
   });
 }

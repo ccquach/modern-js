@@ -2,7 +2,6 @@ class UI {
   constructor() {
     this.profile = document.getElementById('profile');
     this.timeoutId = {
-      alert: null,
       spinner: null,
     };
   }
@@ -91,39 +90,26 @@ class UI {
     document.getElementById('repos').innerHTML = output;
   }
 
-  showAlert(message, className) {
-    this.clearAlert();
-    const alert = this._createAlert(message, className);
-    this._addAlertToDOM(alert);
-    this.timeoutId.alert = setTimeout(() => {
-      this.clearAlert();
-    }, 3000);
+  showAlert(message) {
+    this.profile.appendChild(this._createAlert(message));
   }
 
   clearAlert() {
     const alert = document.querySelector('.alert');
-    if (this.timeoutId.alert) {
-      clearTimeout(this.timeoutId.alert);
-    }
     if (alert) {
       alert.remove();
     }
   }
 
-  _createAlert(message, className) {
-    const alert = document.createElement('div');
-    alert.className = className;
+  _createAlert(message) {
+    const alert = document.createElement('p');
+    alert.className = 'alert';
     alert.appendChild(document.createTextNode(message));
     return alert;
   }
 
-  _addAlertToDOM(alert) {
-    const container = document.querySelector('.search-container');
-    const search = document.querySelector('.search');
-    container.insertBefore(alert, search);
-  }
-
   async displaySpinner() {
+    this.profile.innerHTML = '';
     if (this.timeoutId.spinner) {
       clearTimeout(this.timeoutId.spinner);
     }
